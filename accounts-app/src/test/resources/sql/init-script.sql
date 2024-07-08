@@ -119,3 +119,15 @@ CREATE TABLE IF NOT EXISTS agreement
 
 ALTER TABLE agreement
     ADD FOREIGN KEY (product_id) REFERENCES tpp_product (id);
+
+/**********************************************
+Добавлено ANKropotov:
+*/
+ALTER TABLE tpp_product_register
+    ADD FOREIGN KEY (product_id) REFERENCES tpp_product (id);
+
+
+ALTER TABLE account_pool
+    ADD FOREIGN KEY (registry_type_code)) REFERENCES tpp_ref_product_register_type (value);
+
+/********************************************/
