@@ -57,7 +57,9 @@ public class BaseTest {
                 actualStr,
                 new CustomComparator(
                         JSONCompareMode.STRICT,
-                        new Customization("[*].id", (o1, o2) -> true))
+                        new Customization("id", (o1, o2) -> true),
+                        new Customization("[*].id", (o1, o2) -> true),
+                        new Customization("[*].*.id", (o1, o2) -> true))
         );
     }
 

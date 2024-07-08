@@ -9,8 +9,8 @@ public enum Branch {
     HEAD("001"),
     EKB("002"),
     SIB("055"),
-    BRANCH21("0021"),
-    BRANCH22("0022");
+    BRANCH0021("0021"),
+    BRANCH0022("0022");
 
     private final String code;
 }

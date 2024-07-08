@@ -4,7 +4,7 @@ import dev.kropotov.accounts.dto.AccountDto;
 import dev.kropotov.accounts.entity.Account;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
 import dev.kropotov.accounts.mapper.AccountMapper;
-import dev.kropotov.accounts.repository.AccountPoolRepository;
+import dev.kropotov.accounts.mapper.AccountPoolMapper;
 import dev.kropotov.accounts.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,8 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
-    private final AccountPoolRepository accountPoolRepository;
+    private final AccountPoolMapper accountPoolMapper;
+    private final AccountPoolService accountPoolService;
 
     @Override
     public List<AccountDto> readByAccountNumber(String accountNumber) {
@@ -27,6 +28,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto create(AccountDto dto) {
+        dto.setAccountPool(
+                accountPoolService.readByMdmCode(dto.getAccountPool().getMdmCode()));
         return accountMapper.toDto(accountRepository.save(accountMapper.toEntity(dto)));
     }
 
@@ -44,7 +47,9 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto update(Long id, AccountDto updatedDto) {
         Account account = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Account not found"));
         account.setAccountNumber(updatedDto.getAccountNumber());
-        account.setAccountPool(accountPoolRepository.findAccountPoolByMdmCode(updatedDto.getMdmCode()));
+        account.setAccountPool(
+                accountPoolMapper.toEntity(
+                        accountPoolService.readByMdmCode(updatedDto.getAccountPool().getMdmCode())));
         return accountMapper.toDto(accountRepository.save(account));
     }
 
