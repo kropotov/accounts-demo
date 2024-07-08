@@ -126,6 +126,9 @@ ALTER TABLE agreement
 ALTER TABLE tpp_product_register
     ADD FOREIGN KEY (product_id) REFERENCES tpp_product (id);
 
+ALTER TABLE tpp_product_register
+    ADD FOREIGN KEY (account) REFERENCES account (id);
+
 
 ALTER TABLE account_pool
     ADD FOREIGN KEY (registry_type_code)) REFERENCES tpp_ref_product_register_type (value);
