@@ -1,7 +1,6 @@
 package dev.kropotov.accounts.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import dev.kropotov.accounts.BaseTest;
 import dev.kropotov.accounts.dto.AccountDto;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
 import lombok.SneakyThrows;

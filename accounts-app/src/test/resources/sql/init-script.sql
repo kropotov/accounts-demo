@@ -131,6 +131,6 @@ ALTER TABLE tpp_product_register
 
 
 ALTER TABLE account_pool
-    ADD FOREIGN KEY (registry_type_code)) REFERENCES tpp_ref_product_register_type (value);
+    ADD FOREIGN KEY (registry_type_code) REFERENCES tpp_ref_product_register_type (value);
 
 /********************************************/

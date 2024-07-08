@@ -1,4 +1,4 @@
-package dev.kropotov.accounts;
+package dev.kropotov.accounts.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;

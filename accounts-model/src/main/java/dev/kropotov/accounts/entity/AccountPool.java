@@ -31,7 +31,7 @@ public class AccountPool implements BaseEntity<Long> {
     private String priorityCode;
 
     @Column
-    private String registryTypeCode;
+    private String registryTypeCode;    //TODO: tpp_ref_product_register_type
 
     @OneToMany
     private Set<Account> accounts;
