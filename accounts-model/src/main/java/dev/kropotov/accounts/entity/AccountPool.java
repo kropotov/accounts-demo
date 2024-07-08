@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class AccountPool implements BaseEntity<Long>{
+public class AccountPool implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -44,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto update(Long id, AccountDto updatedDto) {
         Account account = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Account not found"));
         account.setAccountNumber(updatedDto.getAccountNumber());
-        account.setAccountPool(accountPoolRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Account pool not found")));
+        account.setAccountPool(accountPoolRepository.findAccountPoolByMdmCode(updatedDto.getMdmCode()));
         return accountMapper.toDto(accountRepository.save(account));
     }
 

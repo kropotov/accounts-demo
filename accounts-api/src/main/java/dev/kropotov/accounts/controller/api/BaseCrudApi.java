@@ -33,8 +33,7 @@ public interface BaseCrudApi<T> {
     )
     ResponseEntity<T> update(@PathVariable("id") Long id, @Valid @RequestBody T updatedDto);
 
-    @DeleteMapping(value = "/{id}",
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+    @DeleteMapping(value = "/{id}")
     @Operation(
             summary = "Удаление записи",
             description = "Позволяет удалить запись из таблицы по идентификатору"

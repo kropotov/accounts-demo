@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "accountNumber": "475335516415314841861",
+    "branchCode": "0022",
+    "currencyCode": "800",
+    "mdmCode": "15",
+    "priorityCode": "00",
+    "registryTypeCode": "03.012.002_47533_ComSoLd"
+  },
+  {
+    "id": 2,
+    "accountNumber": "4753321651354151",
+    "branchCode": "0022",
+    "currencyCode": "800",
+    "mdmCode": "15",
+    "priorityCode": "00",
+    "registryTypeCode": "03.012.002_47533_ComSoLd"
+  },
+  {
+    "id": 3,
+    "accountNumber": "4753352543276345",
+    "branchCode": "0022",
+    "currencyCode": "800",
+    "mdmCode": "15",
+    "priorityCode": "00",
+    "registryTypeCode": "03.012.002_47533_ComSoLd"
+  },
+  {
+    "id": 4,
+    "accountNumber": "453432352436453276",
+    "branchCode": "0021",
+    "currencyCode": "500",
+    "mdmCode": "13",
+    "priorityCode": "00",
+    "registryTypeCode": "02.001.005_45343_CoDowFF"
+  },
+  {
+    "id": 5,
+    "accountNumber": "45343221651354151",
+    "branchCode": "0021",
+    "currencyCode": "500",
+    "mdmCode": "13",
+    "priorityCode": "00",
+    "registryTypeCode": "02.001.005_45343_CoDowFF"
+  },
+  {
+    "id": 6,
+    "accountNumber": "4534352543276345",
+    "branchCode": "0021",
+    "currencyCode": "500",
+    "mdmCode": "13",
+    "priorityCode": "00",
+    "registryTypeCode": "02.001.005_45343_CoDowFF"
+  }
+]

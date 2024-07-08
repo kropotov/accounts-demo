@@ -13,7 +13,7 @@ import java.util.List;
 
 @Tag(name = "Контроллер счетов", description = "Предоставляет интерфейс для работы со списокм счетов")
 @RequestMapping("/api/accounts")
-public interface AccountApi extends BaseCrudApi<AccountDto>{
+public interface AccountApi extends BaseCrudApi<AccountDto> {
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(
             summary = "Получение записи по имени/всех записей, если не указан параметр accountNumber",
