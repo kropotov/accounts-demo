@@ -15,7 +15,6 @@ public interface AccountPoolMapper {
     @Mapping(source = "accountPool.currency.code", target = "currencyCode")
     AccountPoolDto toDto(AccountPool accountPool);
 
-
     @EnumMapping(nameTransformationStrategy = MappingConstants.STRIP_PREFIX_TRANSFORMATION, configuration = "CURRENCY")
     Currency toCurrency(String code);
 

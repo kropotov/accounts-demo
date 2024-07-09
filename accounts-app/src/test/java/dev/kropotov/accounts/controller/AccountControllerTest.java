@@ -1,5 +1,6 @@
 package dev.kropotov.accounts.controller;
 
+import dev.kropotov.accounts.BaseTest;
 import dev.kropotov.accounts.dto.AccountDto;
 import dev.kropotov.accounts.dto.AccountPoolDto;
 import dev.kropotov.accounts.service.AccountPoolService;
@@ -11,25 +12,23 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AccountController.class)
-public class AccountControllerTest {
+public class AccountControllerTest extends BaseTest {
     @Autowired
     MockMvc mvc;
-
     @MockBean
     AccountService accountService;
-
     @MockBean
     AccountPoolService accountPoolService;
-
     @MockBean
     ProductService productService;
 
@@ -38,7 +37,7 @@ public class AccountControllerTest {
     void readById() {
         Mockito.when(this.accountService.readById(1L)).thenReturn(getAccounts().getFirst());
 
-        mvc.perform(get("/api/accounts/1"))
+        mvc.perform(get("/api/accounts/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.accountNumber").value("111"))
@@ -54,7 +53,7 @@ public class AccountControllerTest {
     void readByAccountNumber() {
         Mockito.when(this.accountService.readByAccountNumber("111")).thenReturn(List.of(getAccounts().getFirst()));
 
-        mvc.perform(get("/api/accounts?accountNumber=111"))
+        mvc.perform(get("/api/accounts?accountNumber={accountNumber}", "111"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[0].accountNumber").value("111"))
@@ -90,21 +89,52 @@ public class AccountControllerTest {
     }
 
     @Test
-    //@SneakyThrows
+    @SneakyThrows
     void create() {
-        //TODO:
+        AccountDto accountDto = getAccounts().getFirst();
+        Mockito.when(this.accountService.create(accountDto)).thenReturn(accountDto);
+
+        mvc.perform(post("/api/accounts")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(accountDto))
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.accountNumber").value("111"))
+                .andExpect(jsonPath("$.accountPool.branchCode").value("0021"))
+                .andExpect(jsonPath("$.accountPool.currencyCode").value("500"))
+                .andExpect(jsonPath("$.accountPool.mdmCode").value("11"))
+                .andExpect(jsonPath("$.accountPool.priorityCode").value("00"))
+                .andExpect(jsonPath("$.accountPool.registryTypeCode").value("registry1"));
     }
 
     @Test
-    //@SneakyThrows
+    @SneakyThrows
     void update() {
-        //TODO:
+        AccountDto accountDto = getAccounts().getFirst();
+        accountDto.setAccountNumber("112");
+        Mockito.when(this.accountService.update(1L, accountDto)).thenReturn(accountDto);
+
+        mvc.perform(put("/api/accounts/{id}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(accountDto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.accountNumber").value("112"))
+                .andExpect(jsonPath("$.accountPool.branchCode").value("0021"))
+                .andExpect(jsonPath("$.accountPool.currencyCode").value("500"))
+                .andExpect(jsonPath("$.accountPool.mdmCode").value("11"))
+                .andExpect(jsonPath("$.accountPool.priorityCode").value("00"))
+                .andExpect(jsonPath("$.accountPool.registryTypeCode").value("registry1"));
+
+        accountDto.setAccountNumber("111");
     }
 
     @Test
-    //@SneakyThrows
-    void delete() {
-        //TODO:
+    @SneakyThrows
+    void deleteTest() {
+        mvc.perform(delete("/api/accounts/{id}", 1L))
+                .andExpect(status().isOk());
     }
 
     private List<AccountDto> getAccounts() {

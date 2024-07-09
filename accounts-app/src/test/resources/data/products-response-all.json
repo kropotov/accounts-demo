@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "state": "OPEN",
+    "number": "111",
+    "registers": [
+      {
+        "id": 1,
+        "type": {
+          "id": 1,
+          "value": "03.012.002_47533_ComSoLd"
+        },
+        "account": null,
+        "currencyCode": "500",
+        "state": null
+      },
+      {
+        "id": 2,
+        "type": {
+          "id": 1,
+          "value": "03.012.002_47533_ComSoLd"
+        },
+        "account": null,
+        "currencyCode": "800",
+        "state": null
+      }
+    ]
+  }
+]

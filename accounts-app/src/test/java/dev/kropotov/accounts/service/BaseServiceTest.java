@@ -1,8 +1,7 @@
 package dev.kropotov.accounts.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.kropotov.accounts.BaseTest;
 import lombok.SneakyThrows;
-import org.apache.commons.io.IOUtils;
 import org.skyscreamer.jsonassert.Customization;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -14,8 +13,6 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import java.nio.charset.StandardCharsets;
-
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 
 /**
@@ -25,13 +22,7 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TES
 @Sql(scripts = {"/sql/init-script.sql", "/sql/test-data.sql"})
 @ActiveProfiles("test")
 @Sql(scripts = "/sql/clear-data.sql", executionPhase = AFTER_TEST_METHOD)
-public abstract class BaseTest {
-    protected static final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
-
-    public static String readResourceToString(String filePath) throws Exception {
-        return IOUtils.resourceToString(filePath, StandardCharsets.UTF_8);
-    }
-
+public abstract class BaseServiceTest extends BaseTest {
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:latest")
             .withDatabaseName("prop")
             .withUsername("postgres")
@@ -58,8 +49,12 @@ public abstract class BaseTest {
                 new CustomComparator(
                         JSONCompareMode.STRICT,
                         new Customization("id", (o1, o2) -> true),
+                        new Customization("*[*].id", (o1, o2) -> true),
                         new Customization("[*].id", (o1, o2) -> true),
-                        new Customization("[*].*.id", (o1, o2) -> true))
+                        new Customization("[*].*.id", (o1, o2) -> true),
+                        new Customization("*[*].*.id", (o1, o2) -> true),
+                        new Customization("[*].*[*].*.id", (o1, o2) -> true)
+                )
         );
     }
 

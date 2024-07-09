@@ -17,9 +17,17 @@ public class Product implements BaseEntity<Long> {
     @Enumerated
     private State state;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @Column
+    private String number;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     private List<ProductRegister> registers;
 
     //TODO: все остальные поля продукта
+    //client_id
+    //type
+
+
 
 }

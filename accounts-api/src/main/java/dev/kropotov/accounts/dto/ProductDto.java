@@ -20,9 +20,14 @@ public class ProductDto {
     @NotBlank
     private State state;
 
+    @Schema(description = "Номер продукта")
+    private String number;
+
     @Schema(description = "Регистры")
     private List<ProductRegisterDto> registers;
 
     //TODO: все поля
+
+
 
 }

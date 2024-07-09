@@ -1,6 +1,7 @@
 package dev.kropotov.accounts.entity;
 
 import dev.kropotov.accounts.enums.Currency;
+import dev.kropotov.accounts.enums.CurrencyConverter;
 import dev.kropotov.accounts.enums.State;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -17,14 +18,17 @@ public class ProductRegister implements BaseEntity<Long> {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column
-    private String type; //TODO: tpp_ref_product_register_type
+    @ManyToOne
+    @JoinColumn(name = "type", referencedColumnName = "value")
+    private ProductRegisterType type;
 
     @ManyToOne
+    @JoinColumn(name = "account")
     private Account account;
 
-    @Column
-    private Currency currencyCode;
+    @Column(name = "currency_code")
+    @Convert(converter = CurrencyConverter.class)
+    private Currency currency;
 
     @Enumerated
     private State state;

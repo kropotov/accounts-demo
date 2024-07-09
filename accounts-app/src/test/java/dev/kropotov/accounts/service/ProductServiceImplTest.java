@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import dev.kropotov.accounts.dto.ProductDto;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
 import lombok.SneakyThrows;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ProductServiceImplTest extends BaseTest {
+public class ProductServiceImplTest extends BaseServiceTest {
     @Autowired
     private ProductService productService;
 
@@ -23,11 +24,12 @@ public class ProductServiceImplTest extends BaseTest {
     private ProductDto productDto;
 
     @Test
-    @SneakyThrows
     void readAll() {
         List<ProductDto> response = productService.readAll();
-        String jsonCurrent = objectMapper.writeValueAsString(response);
+        String jsonCurrent = asJsonString(response);
         String jsonEtalon = readResourceToString(PATH_PRODUCTS);
+        System.out.println("jsonCurrent: " + jsonCurrent);
+        System.out.println("jsonEtalon: " + jsonEtalon);
         assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
     }
 
@@ -35,41 +37,38 @@ public class ProductServiceImplTest extends BaseTest {
     @BeforeEach
     @SneakyThrows
     void create() {
-        productDto = objectMapper.readValue(readResourceToString(PATH_PRODUCT),
+        String jsonEtalon = readResourceToString(PATH_PRODUCT);
+        productDto = objectMapper.readValue(jsonEtalon,
                 new TypeReference<ProductDto>() {
                 });
         ProductDto newProductDto = productService.create(productDto);
-        productDto.setId(newProductDto.getId());
-        assertEquals(productDto, newProductDto);
+        String jsonCurrent = asJsonString(newProductDto);
+        assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
+        productDto = newProductDto;
     }
 
     @Test
     void readById() {
-        //TODO: all tests
         ProductDto newProductDto = productService.readById(productDto.getId());
-        assertEquals(productDto.getId(), newProductDto.getId());
+        assertEquals(productDto, newProductDto);
     }
 
     @Test
     void update() {
-//        String oldProductNumber = "475335516415314841861";
-//        String newProductNumber = "1";
-//
-//        ProductDto productDto = productService.readByProductNumber(oldProductNumber).getFirst();
-//        productDto.setProductNumber(newProductNumber);
-//        ProductDto newProductDto = productService.update(productDto.getId(), productDto);
-//        assertEquals(newProductNumber, newProductDto.getProductNumber());
-//        productDto.setProductNumber(oldProductNumber);
-//        newProductDto = productService.update(productDto.getId(), productDto);
-//        assertEquals(oldProductNumber, newProductDto.getProductNumber());
+        String oldNumber = productDto.getNumber();
+        String newNumber = oldNumber + "1";
+        productDto.setNumber(newNumber);
+        ProductDto newProductDto = productService.update(productDto.getId(), productDto);
+        assertEquals(productDto, newProductDto);
+        productDto.setNumber(oldNumber);
+        newProductDto = productService.update(productDto.getId(), productDto);
+        assertEquals(productDto, newProductDto);
     }
 
     @Test
+    @AfterEach
     @SneakyThrows
     void delete() {
-        ProductDto productDto = objectMapper.readValue(readResourceToString(PATH_PRODUCT),
-                new TypeReference<ProductDto>() {
-                });
         ProductDto newProductDto = productService.create(productDto);
         productDto.setId(newProductDto.getId());
         assertEquals(productDto, newProductDto);

@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class AccountServiceImplTest extends BaseTest {
+public class AccountServiceImplTest extends BaseServiceTest {
     @Autowired
     private AccountService accountService;
 
@@ -27,10 +27,9 @@ public class AccountServiceImplTest extends BaseTest {
     }
 
     @Test
-    @SneakyThrows
     void readAll() {
         List<AccountDto> response = accountService.readAll();
-        String jsonCurrent = objectMapper.writeValueAsString(response);
+        String jsonCurrent = asJsonString(response);
         String jsonEtalon = readResourceToString(PATH_ACCOUNTS);
         assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
     }
