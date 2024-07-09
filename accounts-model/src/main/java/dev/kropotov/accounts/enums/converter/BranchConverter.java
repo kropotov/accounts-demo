@@ -1,5 +1,6 @@
-package dev.kropotov.accounts.enums;
+package dev.kropotov.accounts.enums.converter;
 
+import dev.kropotov.accounts.enums.Branch;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

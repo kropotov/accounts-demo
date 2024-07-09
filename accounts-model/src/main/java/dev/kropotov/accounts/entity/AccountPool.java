@@ -1,9 +1,9 @@
 package dev.kropotov.accounts.entity;
 
 import dev.kropotov.accounts.enums.Branch;
-import dev.kropotov.accounts.enums.BranchConverter;
+import dev.kropotov.accounts.enums.converter.BranchConverter;
 import dev.kropotov.accounts.enums.Currency;
-import dev.kropotov.accounts.enums.CurrencyConverter;
+import dev.kropotov.accounts.enums.converter.CurrencyConverter;
 import jakarta.persistence.*;
 import lombok.Data;
 
