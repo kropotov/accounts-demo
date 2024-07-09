@@ -48,6 +48,7 @@ public abstract class BaseServiceTest extends BaseTest {
                 actualStr,
                 new CustomComparator(
                         JSONCompareMode.STRICT,
+                        //TODO: сделать че-то приличное с этим
                         new Customization("id", (o1, o2) -> true),
                         new Customization("*[*].id", (o1, o2) -> true),
                         new Customization("[*].id", (o1, o2) -> true),
