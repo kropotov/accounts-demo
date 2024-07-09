@@ -15,6 +15,8 @@ public class CorporateSettlementAccountController implements CorporateSettlement
     public ResponseEntity<ResponsePayload<CorporateSettlementAccountResponseDto>> create(
             CorporateSettlementAccountRequestDto dto) {
         //TODO: реализация контроллера
-        return null;
+        CorporateSettlementAccountResponseDto responseDto = new CorporateSettlementAccountResponseDto();
+        responseDto.setAccountId("11111111111111111");
+        return ResponseEntity.ok(new ResponsePayload<>(responseDto));
     }
 }

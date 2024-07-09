@@ -9,7 +9,6 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Schema(description = "Ответ REST сервиса")
 public class ResponsePayload<T> {
     /**

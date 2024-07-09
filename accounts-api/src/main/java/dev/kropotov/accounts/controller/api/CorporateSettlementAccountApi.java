@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Контроллер ПР", description = "Предназначен для создания нового объекта ПРОДУКТОВЫЙ РЕГИСТР (ПР)")
+@Tag(name = "Контроллер ПРОДУКТОВЫЙ РЕГИСТР (ПР)", description = "Предназначен для создания нового объекта ПРОДУКТОВЫЙ РЕГИСТР (ПР)")
 @RequestMapping("/corporate-settlement-account")
 public interface CorporateSettlementAccountApi {
     @PostMapping(value = "/create",
