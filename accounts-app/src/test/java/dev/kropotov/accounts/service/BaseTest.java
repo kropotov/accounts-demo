@@ -13,8 +13,6 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.nio.charset.StandardCharsets;
 
@@ -24,24 +22,26 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TES
  * Базовый тестовый класс.
  */
 @SpringBootTest
-@Testcontainers
 @Sql(scripts = {"/sql/init-script.sql", "/sql/test-data.sql"})
 @ActiveProfiles("test")
 @Sql(scripts = "/sql/clear-data.sql", executionPhase = AFTER_TEST_METHOD)
-public class BaseTest {
+public abstract class BaseTest {
     protected static final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
     public static String readResourceToString(String filePath) throws Exception {
         return IOUtils.resourceToString(filePath, StandardCharsets.UTF_8);
     }
 
-    @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:latest")
             .withDatabaseName("prop")
             .withUsername("postgres")
             .withPassword("pass")
             .withExposedPorts(5432)
             .withReuse(true);
+
+    static {
+        postgres.start();
+    }
 
     @DynamicPropertySource
     static void registerPgProperties(DynamicPropertyRegistry registry) {
