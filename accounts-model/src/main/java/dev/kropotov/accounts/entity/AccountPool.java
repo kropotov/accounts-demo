@@ -7,7 +7,7 @@ import dev.kropotov.accounts.enums.converter.CurrencyConverter;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,6 +34,7 @@ public class AccountPool implements BaseEntity<Long> {
     @JoinColumn(name = "registry_type_code", referencedColumnName = "value")
     private ProductRegisterType registryType;
 
-    @OneToMany
-    private Set<Account> accounts;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_pool_id")
+    private List<Account> accounts;
 }

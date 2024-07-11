@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -24,7 +25,7 @@ public class ProductDto {
     private String number;
 
     @Schema(description = "Регистры")
-    private List<ProductRegisterDto> registers;
+    private List<ProductRegisterDto> registers = new ArrayList<>();
 
     //TODO: все поля
 

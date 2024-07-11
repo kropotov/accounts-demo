@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +49,11 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         product.setNumber(updatedDto.getNumber());
         product.setState(updatedDto.getState());
-        product.setRegisters(updatedDto.getRegisters().stream().map(productRegisterMapper::toEntity).toList());
+        product.setRegisters(updatedDto.getRegisters().stream()
+                .map(productRegisterMapper::toEntity)
+                .collect(Collectors.toList())); //нельзя сразу toList(), т.к. будет UnsupportedOperationException
+                                                //т.к. создается immutable - лист, а нужен мутабельный
+
         //TODO: все сеттеры после добавления полей
         return productMapper.toDto(productRepository.save(product));
     }

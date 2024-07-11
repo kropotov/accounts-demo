@@ -20,7 +20,7 @@ public class Product implements BaseEntity<Long> {
     @Column
     private String number;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<ProductRegister> registers;
 
