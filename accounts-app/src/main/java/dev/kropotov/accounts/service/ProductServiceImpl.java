@@ -1,6 +1,7 @@
 package dev.kropotov.accounts.service;
 
 import dev.kropotov.accounts.dto.ProductDto;
+import dev.kropotov.accounts.dto.ProductRegisterDto;
 import dev.kropotov.accounts.entity.Product;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
 import dev.kropotov.accounts.mapper.ProductMapper;
@@ -18,24 +19,26 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final ProductRegisterMapper productRegisterMapper;
+    private final ProductRegisterService productRegisterService;
     private final ProductRegisterTypeService productRegisterTypeService;
 
     @Override
     public ProductDto create(ProductDto dto) {
-        dto.getRegisters().forEach(productRegisterDto -> productRegisterDto.setType(
-                        productRegisterTypeService.readByValue(productRegisterDto.getType().getValue())));
-
+        if (dto.getRegisters() != null) {
+            dto.getRegisters().forEach(productRegisterDto -> productRegisterDto.setType(
+                    productRegisterTypeService.readByValue(productRegisterDto.getType().getValue())));
+        }
         return productMapper.toDto(productRepository.save(productMapper.toEntity(dto)));
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) //TODO: убрать
     public List<ProductDto> readAll() {
         return productRepository.findAll().stream().map(productMapper::toDto).toList();
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) //TODO: убрать
     public ProductDto readById(Long id) {
         return productMapper.toDto(productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found")));
     }
@@ -53,5 +56,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public ProductRegisterDto createProductRegister(ProductDto productDto, ProductRegisterDto newProductRegisterDto) {
+        newProductRegisterDto = productRegisterService.create(newProductRegisterDto);
+        productDto.getRegisters().add(newProductRegisterDto);
+        update(productDto.getId(), productDto);
+        return newProductRegisterDto;
     }
 }

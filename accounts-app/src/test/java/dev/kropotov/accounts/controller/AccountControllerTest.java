@@ -2,10 +2,7 @@ package dev.kropotov.accounts.controller;
 
 import dev.kropotov.accounts.BaseTest;
 import dev.kropotov.accounts.dto.AccountDto;
-import dev.kropotov.accounts.service.AccountPoolService;
-import dev.kropotov.accounts.service.AccountService;
-import dev.kropotov.accounts.service.ProductRegisterTypeService;
-import dev.kropotov.accounts.service.ProductService;
+import dev.kropotov.accounts.service.*;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -33,6 +30,9 @@ public class AccountControllerTest extends BaseTest {
     ProductService productService;
     @MockBean
     ProductRegisterTypeService productRegisterTypeService;
+    @MockBean
+    ProductRegisterService productRegisterService;
+
 
     @Test
     @SneakyThrows

@@ -21,5 +21,5 @@ public interface CorporateSettlementAccountApi {
             description = "Позволяет зарегистрировать новую запись в таблице"
     )
     ResponseEntity<ResponsePayload<CorporateSettlementAccountResponseDto>> create(
-            @Valid @RequestBody CorporateSettlementAccountRequestDto dto);
+            @Valid @RequestBody CorporateSettlementAccountRequestDto request);
 }

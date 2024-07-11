@@ -2,6 +2,10 @@ package dev.kropotov.accounts.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.kropotov.accounts.dto.ProductDto;
+import dev.kropotov.accounts.dto.ProductRegisterDto;
+import dev.kropotov.accounts.dto.ProductRegisterTypeDto;
+import dev.kropotov.accounts.enums.Currency;
+import dev.kropotov.accounts.enums.State;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ProductServiceImplTest extends BaseServiceTest {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductRegisterTypeService productRegisterTypeService;
 
     private static final String PATH_PRODUCT = "/data/product.json";
     private static final String PATH_PRODUCTS = "/data/products-response-all.json";
@@ -39,7 +45,7 @@ public class ProductServiceImplTest extends BaseServiceTest {
     void create() {
         String jsonEtalon = readResourceToString(PATH_PRODUCT);
         productDto = objectMapper.readValue(jsonEtalon,
-                new TypeReference<ProductDto>() {
+                new TypeReference<>() {
                 });
         ProductDto newProductDto = productService.create(productDto);
         String jsonCurrent = asJsonString(newProductDto);
@@ -66,13 +72,23 @@ public class ProductServiceImplTest extends BaseServiceTest {
     }
 
     @Test
+    void createProductRegister() {
+        ProductRegisterTypeDto registerTypeDto = productRegisterTypeService.readByValue("03.012.002_47533_ComSoLd");
+
+        ProductRegisterDto registerDto = new ProductRegisterDto()
+                .setType(registerTypeDto)
+                .setCurrency(Currency.CURRENCY500)
+                .setState(State.OPEN);
+
+        registerDto = productService.createProductRegister(productDto, registerDto);
+
+        assertEquals(registerDto, productDto.getRegisters().getLast());
+    }
+
+    @Test
     @AfterEach
-    @SneakyThrows
     void delete() {
-        ProductDto newProductDto = productService.create(productDto);
-        productDto.setId(newProductDto.getId());
-        assertEquals(productDto, newProductDto);
-        productService.delete(newProductDto.getId());
-        assertThrows(ResourceNotFoundException.class, () -> productService.readById(newProductDto.getId()));
+        productService.delete(productDto.getId());
+        assertThrows(ResourceNotFoundException.class, () -> productService.readById(productDto.getId()));
     }
 }

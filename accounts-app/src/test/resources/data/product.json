@@ -10,7 +10,7 @@
         "value": "03.012.002_47533_ComSoLd"
       },
       "account": null,
-      "currencyCode": "500",
+      "currency": "500",
       "state": null
     },
     {
@@ -20,7 +20,7 @@
         "value": "03.012.002_47533_ComSoLd"
       },
       "account": null,
-      "currencyCode": "800",
+      "currency": "800",
       "state": null
     }
   ]

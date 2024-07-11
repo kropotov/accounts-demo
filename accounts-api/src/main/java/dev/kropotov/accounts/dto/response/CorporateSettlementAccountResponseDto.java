@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CorporateSettlementAccountResponseDto {
 
-    @Schema(description = "Идентификатор продуктового регистраы")
+    @Schema(description = "Идентификатор продуктового регистра")
     @NotBlank
     private String accountId;
 }
