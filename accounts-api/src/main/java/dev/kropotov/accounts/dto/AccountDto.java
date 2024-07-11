@@ -1,7 +1,6 @@
 package dev.kropotov.accounts.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -19,9 +18,5 @@ public class AccountDto {
     @NotBlank
     @Size(min = 1, max = 25)
     private String accountNumber;
-
-    @Schema(description = "Пул счетов")
-    @Valid
-    private AccountPoolDto accountPool;
 
 }

@@ -2,10 +2,6 @@ package dev.kropotov.accounts.controller;
 
 import dev.kropotov.accounts.BaseTest;
 import dev.kropotov.accounts.dto.AccountDto;
-import dev.kropotov.accounts.dto.AccountPoolDto;
-import dev.kropotov.accounts.dto.ProductRegisterTypeDto;
-import dev.kropotov.accounts.enums.Branch;
-import dev.kropotov.accounts.enums.Currency;
 import dev.kropotov.accounts.service.AccountPoolService;
 import dev.kropotov.accounts.service.AccountService;
 import dev.kropotov.accounts.service.ProductRegisterTypeService;
@@ -46,13 +42,7 @@ public class AccountControllerTest extends BaseTest {
         mvc.perform(get("/api/accounts/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.accountNumber").value("111"))
-                .andExpect(jsonPath("$.accountPool.branch").value("0021"))
-                .andExpect(jsonPath("$.accountPool.currency").value("500"))
-                .andExpect(jsonPath("$.accountPool.mdmCode").value("11"))
-                .andExpect(jsonPath("$.accountPool.priorityCode").value("00"))
-                .andExpect(jsonPath("$.accountPool.registryType.id").value(1L))
-                .andExpect(jsonPath("$.accountPool.registryType.value").value("registry1"));
+                .andExpect(jsonPath("$.accountNumber").value("111"));
     }
 
     @Test
@@ -63,13 +53,7 @@ public class AccountControllerTest extends BaseTest {
         mvc.perform(get("/api/accounts?accountNumber={accountNumber}", "111"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
-                .andExpect(jsonPath("$[0].accountNumber").value("111"))
-                .andExpect(jsonPath("$[0].accountPool.branch").value("0021"))
-                .andExpect(jsonPath("$[0].accountPool.currency").value("500"))
-                .andExpect(jsonPath("$[0].accountPool.mdmCode").value("11"))
-                .andExpect(jsonPath("$[0].accountPool.priorityCode").value("00"))
-                .andExpect(jsonPath("$[0].accountPool.registryType.id").value(1L))
-                .andExpect(jsonPath("$[0].accountPool.registryType.value").value("registry1"));
+                .andExpect(jsonPath("$[0].accountNumber").value("111"));
     }
 
     @Test
@@ -81,20 +65,8 @@ public class AccountControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[0].accountNumber").value("111"))
-                .andExpect(jsonPath("$[0].accountPool.branch").value("0021"))
-                .andExpect(jsonPath("$[0].accountPool.currency").value("500"))
-                .andExpect(jsonPath("$[0].accountPool.mdmCode").value("11"))
-                .andExpect(jsonPath("$[0].accountPool.priorityCode").value("00"))
-                .andExpect(jsonPath("$[0].accountPool.registryType.id").value(1L))
-                .andExpect(jsonPath("$[0].accountPool.registryType.value").value("registry1"))
                 .andExpect(jsonPath("$[1].id").value(2L))
-                .andExpect(jsonPath("$[1].accountNumber").value("222"))
-                .andExpect(jsonPath("$[1].accountPool.branch").value("0022"))
-                .andExpect(jsonPath("$[1].accountPool.currency").value("800"))
-                .andExpect(jsonPath("$[1].accountPool.mdmCode").value("22"))
-                .andExpect(jsonPath("$[1].accountPool.priorityCode").value("00"))
-                .andExpect(jsonPath("$[1].accountPool.registryType.id").value(2L))
-                .andExpect(jsonPath("$[1].accountPool.registryType.value").value("registry2"));
+                .andExpect(jsonPath("$[1].accountNumber").value("222"));
     }
 
     @Test
@@ -109,13 +81,7 @@ public class AccountControllerTest extends BaseTest {
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.accountNumber").value("111"))
-                .andExpect(jsonPath("$.accountPool.branch").value("0021"))
-                .andExpect(jsonPath("$.accountPool.currency").value("500"))
-                .andExpect(jsonPath("$.accountPool.mdmCode").value("11"))
-                .andExpect(jsonPath("$.accountPool.priorityCode").value("00"))
-                .andExpect(jsonPath("$.accountPool.registryType.id").value(1L))
-                .andExpect(jsonPath("$.accountPool.registryType.value").value("registry1"));
+                .andExpect(jsonPath("$.accountNumber").value("111"));
     }
 
     @Test
@@ -130,13 +96,7 @@ public class AccountControllerTest extends BaseTest {
                         .content(asJsonString(accountDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.accountNumber").value("112"))
-                .andExpect(jsonPath("$.accountPool.branch").value("0021"))
-                .andExpect(jsonPath("$.accountPool.currency").value("500"))
-                .andExpect(jsonPath("$.accountPool.mdmCode").value("11"))
-                .andExpect(jsonPath("$.accountPool.priorityCode").value("00"))
-                .andExpect(jsonPath("$.accountPool.registryType.id").value(1L))
-                .andExpect(jsonPath("$.accountPool.registryType.value").value("registry1"));
+                .andExpect(jsonPath("$.accountNumber").value("112"));
 
         accountDto.setAccountNumber("111");
     }
@@ -150,21 +110,9 @@ public class AccountControllerTest extends BaseTest {
 
     private List<AccountDto> getAccounts() {
         AccountDto one = new AccountDto(1L,
-                "111",
-                new AccountPoolDto(1L,
-                        Branch.BRANCH0021,
-                        Currency.CURRENCY500,
-                        "11",
-                        "00",
-                        new ProductRegisterTypeDto(1L, "registry1")));
+                "111");
         AccountDto two = new AccountDto(2L,
-                "222",
-                new AccountPoolDto(2L,
-                        Branch.BRANCH0022,
-                        Currency.CURRENCY800,
-                        "22",
-                        "00",
-                        new ProductRegisterTypeDto(2L, "registry2")));
+                "222");
         return List.of(one, two);
     }
 }

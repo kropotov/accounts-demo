@@ -1,6 +1,7 @@
 package dev.kropotov.accounts.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class CorporateSettlementAccountRequestDto {
     private Long instanceId;
 
     @Schema(description = "Тип регистра")
+    @NotBlank
     private String registryTypeCode;
 
     @Schema(description = "Тип счета")
@@ -34,6 +36,7 @@ public class CorporateSettlementAccountRequestDto {
     private String priorityCode;
 
     @Schema(description = "Id клиента")
+    @NotBlank
     private String mdmCode;
 
     @Schema(description = "Код клиента")
@@ -47,24 +50,5 @@ public class CorporateSettlementAccountRequestDto {
 
     @Schema(description = "Код точки продаж")
     private String salesCode;
-/*
-    @Schema(description = "Тип регистра")
-    @NotBlank
-    private ProductRegisterTypeDto type;
-
-    @Schema(description = "Счет")
-    @Valid
-    private AccountDto account;
-
-    @Schema(description = "Код валюты")
-    @NotBlank
-    @Size(min = 1, max = 3)
-    private String currencyCode;
-
-    @Schema(description = "Состояние")
-    @Range(min = 1, max = 3)
-    private State state;*/
-
-    //TODO: добавить остальные поля
 
 }

@@ -1,5 +1,6 @@
 package dev.kropotov.accounts.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.kropotov.accounts.enums.Branch;
 import dev.kropotov.accounts.enums.Currency;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -8,6 +9,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -33,4 +37,7 @@ public class AccountPoolDto {
     @Schema(description = "Тип регистра")
     @Valid
     private ProductRegisterTypeDto registryType;
+
+    @JsonIgnore
+    private final List<AccountDto> accounts = new ArrayList<>();
 }

@@ -1,92 +1,26 @@
 [
   {
     "id": 1,
-    "accountNumber": "475335516415314841861",
-    "accountPool": {
-      "id": 1,
-      "branch": "0022",
-      "currency": "800",
-      "mdmCode": "15",
-      "priorityCode": "00",
-      "registryType": {
-        "id": 1,
-        "value": "03.012.002_47533_ComSoLd"
-      }
-    }
+    "accountNumber": "475335516415314841861"
   },
   {
     "id": 2,
-    "accountNumber": "4753321651354151",
-    "accountPool": {
-      "id": 1,
-      "branch": "0022",
-      "currency": "800",
-      "mdmCode": "15",
-      "priorityCode": "00",
-      "registryType": {
-        "id": 1,
-        "value": "03.012.002_47533_ComSoLd"
-      }
-    }
+    "accountNumber": "4753321651354151"
   },
   {
     "id": 3,
-    "accountNumber": "4753352543276345",
-    "accountPool": {
-      "id": 1,
-      "branch": "0022",
-      "currency": "800",
-      "mdmCode": "15",
-      "priorityCode": "00",
-      "registryType": {
-        "id": 1,
-        "value": "03.012.002_47533_ComSoLd"
-      }
-    }
+    "accountNumber": "4753352543276345"
   },
   {
     "id": 4,
-    "accountNumber": "453432352436453276",
-    "accountPool": {
-      "id": 2,
-      "branch": "0021",
-      "currency": "500",
-      "mdmCode": "13",
-      "priorityCode": "00",
-      "registryType": {
-        "id": 2,
-        "value": "02.001.005_45343_CoDowFF"
-      }
-    }
+    "accountNumber": "453432352436453276"
   },
   {
     "id": 5,
-    "accountNumber": "45343221651354151",
-    "accountPool": {
-      "id": 2,
-      "branch": "0021",
-      "currency": "500",
-      "mdmCode": "13",
-      "priorityCode": "00",
-      "registryType": {
-        "id": 2,
-        "value": "02.001.005_45343_CoDowFF"
-      }
-    }
+    "accountNumber": "45343221651354151"
   },
   {
     "id": 6,
-    "accountNumber": "4534352543276345",
-    "accountPool": {
-      "id": 2,
-      "branch": "0021",
-      "currency": "500",
-      "mdmCode": "13",
-      "priorityCode": "00",
-      "registryType": {
-        "id": 2,
-        "value": "02.001.005_45343_CoDowFF"
-      }
-    }
+    "accountNumber": "4534352543276345"
   }
 ]

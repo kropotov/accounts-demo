@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
+
 @RequiredArgsConstructor
 @Getter
 public enum Currency {
@@ -12,4 +14,8 @@ public enum Currency {
 
     @JsonValue
     private final String code;
+
+    public static Currency findByCode(String code) {
+        return Arrays.stream(values()).filter(currency -> currency.getCode().equalsIgnoreCase(code)).findFirst().orElse(null);
+    }
 }

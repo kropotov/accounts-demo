@@ -1,12 +1,3 @@
 {
-  "accountNumber": "111",
-  "accountPool": {
-    "branch": "0022",
-    "currency": "800",
-    "mdmCode": "15",
-    "priorityCode": "00",
-    "registryType": {
-      "value": "03.012.002_47533_ComSoLd"
-    }
-  }
+  "accountNumber": "111"
 }
