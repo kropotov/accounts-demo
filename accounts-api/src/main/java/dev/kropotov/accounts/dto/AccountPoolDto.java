@@ -1,6 +1,7 @@
 package dev.kropotov.accounts.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -31,5 +32,6 @@ public class AccountPoolDto {
     private String priorityCode;
 
     @Schema(description = "Тип регистра")
-    private String registryTypeCode;
+    @Valid
+    private ProductRegisterTypeDto registryType;
 }

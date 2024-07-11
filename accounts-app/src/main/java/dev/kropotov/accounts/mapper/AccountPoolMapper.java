@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = ProductRegisterTypeMapper.class)
 public interface AccountPoolMapper {
     @Mapping(source = "accountPool.branch.code", target = "branchCode")
     @Mapping(source = "accountPool.currency.code", target = "currencyCode")

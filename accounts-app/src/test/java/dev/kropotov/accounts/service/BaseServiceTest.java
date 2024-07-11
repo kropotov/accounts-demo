@@ -54,6 +54,7 @@ public abstract class BaseServiceTest extends BaseTest {
                         new Customization("[*].id", (o1, o2) -> true),
                         new Customization("[*].*.id", (o1, o2) -> true),
                         new Customization("*[*].*.id", (o1, o2) -> true),
+                        new Customization("[*].*.*.id", (o1, o2) -> true),
                         new Customization("[*].*[*].*.id", (o1, o2) -> true)
                 )
         );

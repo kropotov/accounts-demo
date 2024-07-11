@@ -8,4 +8,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = "dev.kropotov.accounts.repository")
 @EnableTransactionManagement
 public class EntityManagerConfig {
+    // Вынесен поиск репозиториев из аннотаций main-класса,
+    // иначе нужно поднимать PG-тест-контейнер при любом тестировании
 }

@@ -5,6 +5,8 @@
     "currencyCode": "800",
     "mdmCode": "15",
     "priorityCode": "00",
-    "registryTypeCode": "03.012.002_47533_ComSoLd"
+    "registryType": {
+      "value": "03.012.002_47533_ComSoLd"
+    }
   }
 }

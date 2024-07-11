@@ -30,8 +30,9 @@ public class AccountPool implements BaseEntity<Long> {
     @Column
     private String priorityCode;
 
-    @Column
-    private String registryTypeCode;    //TODO: tpp_ref_product_register_type
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "registry_type_code", referencedColumnName = "value")
+    private ProductRegisterType registryType;
 
     @OneToMany
     private Set<Account> accounts;

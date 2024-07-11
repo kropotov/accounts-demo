@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = "spring", uses = AccountMapper.class)
+@Mapper(componentModel = "spring", uses = {AccountMapper.class, ProductRegisterTypeMapper.class})
 public interface ProductRegisterMapper {
     @Mapping(source = "productRegister.currency.code", target = "currencyCode")
     ProductRegisterDto toDto(ProductRegister productRegister);
@@ -17,5 +17,5 @@ public interface ProductRegisterMapper {
     Currency toCurrency(String code);
 
     @Mapping(target = "currency", expression = "java(toCurrency(productRegisterDto.getCurrencyCode()))")
-     ProductRegister toEntity(ProductRegisterDto productRegisterDto);
+    ProductRegister toEntity(ProductRegisterDto productRegisterDto);
 }

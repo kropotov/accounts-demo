@@ -18,7 +18,7 @@ public class ProductRegisterDto {
     private Long id;
 
     @Schema(description = "Тип регистра")
-    @NotBlank
+    @Valid
     private ProductRegisterTypeDto type;
 
     @Schema(description = "Счет")
