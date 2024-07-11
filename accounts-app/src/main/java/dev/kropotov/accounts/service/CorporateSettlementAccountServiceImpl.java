@@ -34,12 +34,17 @@ public class CorporateSettlementAccountServiceImpl implements CorporateSettlemen
                 registerTypeDto
         );
 
+        if (accountPoolDto == null) {
+            throw new IllegalArgumentException("Не найден пул счетов с заданными параметрами"); //TODO: сдедать хендлер
+        }
+
         AccountDto accountDto = accountPoolDto.getAccounts().getFirst();
         ProductRegisterDto registerDto = new ProductRegisterDto()
                 .setType(registerTypeDto)
                 .setAccount(accountDto)
                 .setCurrency(currency)
-                .setState(State.OPEN);
+                .setState(State.OPEN)
+                .setAccountNumber(accountDto.getAccountNumber());
 
         registerDto = productService.createProductRegister(productDto, registerDto);
 

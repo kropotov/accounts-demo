@@ -31,8 +31,6 @@ public class AccountServiceImplTest extends BaseServiceTest {
         List<AccountDto> response = accountService.readAll();
         String jsonCurrent = asJsonString(response);
         String jsonEtalon = readResourceToString(PATH_ACCOUNTS);
-        System.out.println("jsonEtalon: " + jsonEtalon);
-        System.out.println("jsonCurrent: " + jsonCurrent);
         assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
     }
 

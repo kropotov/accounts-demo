@@ -10,19 +10,27 @@
           "id": 1,
           "value": "03.012.002_47533_ComSoLd"
         },
-        "account": null,
-        "currency": "500",
-        "state": null
+        "account": {
+          "id": 7,
+          "accountNumber": "475335516415314841861"
+        },
+        "currency": "800",
+        "state": "OPEN",
+        "accountNumber": "475335516415314841861"
       },
       {
         "id": 2,
         "type": {
-          "id": 1,
-          "value": "03.012.002_47533_ComSoLd"
+          "id": 2,
+          "value": "02.001.005_45343_CoDowFF"
         },
-        "account": null,
-        "currency": "800",
-        "state": null
+        "account": {
+          "id": 8,
+          "accountNumber": "453432352436453276"
+        },
+        "currency": "500",
+        "state": "OPEN",
+        "accountNumber": "453432352436453276"
       }
     ]
   }

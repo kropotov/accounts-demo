@@ -16,6 +16,7 @@ public class ProductRegisterServiceImpl implements ProductRegisterService {
     @Override
     public ProductRegisterDto create(ProductRegisterDto newProductRegisterDto) {
         return productRegisterMapper.toDto(
-                productRegisterRepository.save(productRegisterMapper.toEntity(newProductRegisterDto)));
+                productRegisterRepository.save(
+                        productRegisterMapper.toEntity(newProductRegisterDto)));
     }
 }

@@ -35,4 +35,7 @@ public class ProductRegisterDto {
     @Range(min = 1, max = 3)
     private State state;
 
+    @Schema(description = "Номер счета")
+    private String accountNumber;
+
 }

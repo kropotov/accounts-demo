@@ -22,7 +22,7 @@ public class ProductRegister implements BaseEntity<Long> {
     @JoinColumn(name = "type", referencedColumnName = "value")
     private ProductRegisterType type;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account")
     private Account account;
 
