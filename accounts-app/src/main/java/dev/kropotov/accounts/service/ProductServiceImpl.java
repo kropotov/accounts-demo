@@ -4,6 +4,7 @@ import dev.kropotov.accounts.dto.ProductDto;
 import dev.kropotov.accounts.dto.ProductRegisterDto;
 import dev.kropotov.accounts.entity.Product;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
+import dev.kropotov.accounts.mapper.AgreementMapper;
 import dev.kropotov.accounts.mapper.ProductMapper;
 import dev.kropotov.accounts.mapper.ProductRegisterMapper;
 import dev.kropotov.accounts.repository.ProductRepository;
@@ -22,6 +23,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRegisterMapper productRegisterMapper;
     private final ProductRegisterService productRegisterService;
     private final ProductRegisterTypeService productRegisterTypeService;
+    private final AgreementMapper agreementMapper;
 
     @Override
     public ProductDto create(ProductDto dto) {
@@ -53,6 +55,14 @@ public class ProductServiceImpl implements ProductService {
                 .map(productRegisterMapper::toEntity)
                 .collect(Collectors.toList())); //нельзя сразу toList(), т.к. будет UnsupportedOperationException
         //т.к. создается immutable - лист, а нужен мутабельный
+
+        product.setProductCode(updatedDto.getProductCode());
+        product.setType(updatedDto.getType());
+        product.setDateOfConclusion(updatedDto.getDateOfConclusion());
+
+        product.setAgreements(updatedDto.getAgreements().stream()
+                .map(agreementMapper::toEntity)
+                .collect(Collectors.toList())); //нельзя сразу toList(), т.к. будет UnsupportedOperationException
 
         //TODO: все сеттеры после добавления полей
         return productMapper.toDto(productRepository.save(product));
