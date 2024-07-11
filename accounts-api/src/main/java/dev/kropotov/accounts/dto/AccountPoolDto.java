@@ -1,9 +1,10 @@
 package dev.kropotov.accounts.dto;
 
+import dev.kropotov.accounts.enums.Branch;
+import dev.kropotov.accounts.enums.Currency;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +17,12 @@ public class AccountPoolDto {
     private Long id;
 
     @Schema(description = "Код филиала")
-    @NotBlank
-    @Size(min = 1, max = 4)
-    private String branchCode;
+    @NotNull
+    private Branch branch;
 
     @Schema(description = "Код валюты")
-    @NotBlank
-    @Size(min = 1, max = 3)
-    private String currencyCode;
+    @NotNull
+    private Currency currency;
 
     @Schema(description = "Id клиента")
     private String mdmCode;

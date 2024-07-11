@@ -29,7 +29,12 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto create(AccountDto dto) {
         dto.setAccountPool(
-                accountPoolService.readByMdmCode(dto.getAccountPool().getMdmCode()));
+                accountPoolService.getAccountPool(
+                        dto.getAccountPool().getBranch(),
+                        dto.getAccountPool().getCurrency(),
+                        dto.getAccountPool().getMdmCode(),
+                        dto.getAccountPool().getPriorityCode(),
+                        dto.getAccountPool().getRegistryType()));
         return accountMapper.toDto(accountRepository.save(accountMapper.toEntity(dto)));
     }
 
@@ -49,7 +54,12 @@ public class AccountServiceImpl implements AccountService {
         account.setAccountNumber(updatedDto.getAccountNumber());
         account.setAccountPool(
                 accountPoolMapper.toEntity(
-                        accountPoolService.readByMdmCode(updatedDto.getAccountPool().getMdmCode())));
+                        accountPoolService.getAccountPool(
+                                updatedDto.getAccountPool().getBranch(),
+                                updatedDto.getAccountPool().getCurrency(),
+                                updatedDto.getAccountPool().getMdmCode(),
+                                updatedDto.getAccountPool().getPriorityCode(),
+                                updatedDto.getAccountPool().getRegistryType())));
         return accountMapper.toDto(accountRepository.save(account));
     }
 
