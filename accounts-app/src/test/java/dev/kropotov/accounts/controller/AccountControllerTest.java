@@ -4,6 +4,8 @@ import dev.kropotov.accounts.BaseTest;
 import dev.kropotov.accounts.dto.AccountDto;
 import dev.kropotov.accounts.dto.AccountPoolDto;
 import dev.kropotov.accounts.dto.ProductRegisterTypeDto;
+import dev.kropotov.accounts.enums.Branch;
+import dev.kropotov.accounts.enums.Currency;
 import dev.kropotov.accounts.service.AccountPoolService;
 import dev.kropotov.accounts.service.AccountService;
 import dev.kropotov.accounts.service.ProductRegisterTypeService;
@@ -45,8 +47,8 @@ public class AccountControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.accountNumber").value("111"))
-                .andExpect(jsonPath("$.accountPool.branchCode").value("0021"))
-                .andExpect(jsonPath("$.accountPool.currencyCode").value("500"))
+                .andExpect(jsonPath("$.accountPool.branch").value("0021"))
+                .andExpect(jsonPath("$.accountPool.currency").value("500"))
                 .andExpect(jsonPath("$.accountPool.mdmCode").value("11"))
                 .andExpect(jsonPath("$.accountPool.priorityCode").value("00"))
                 .andExpect(jsonPath("$.accountPool.registryType.id").value(1L))
@@ -62,8 +64,8 @@ public class AccountControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[0].accountNumber").value("111"))
-                .andExpect(jsonPath("$[0].accountPool.branchCode").value("0021"))
-                .andExpect(jsonPath("$[0].accountPool.currencyCode").value("500"))
+                .andExpect(jsonPath("$[0].accountPool.branch").value("0021"))
+                .andExpect(jsonPath("$[0].accountPool.currency").value("500"))
                 .andExpect(jsonPath("$[0].accountPool.mdmCode").value("11"))
                 .andExpect(jsonPath("$[0].accountPool.priorityCode").value("00"))
                 .andExpect(jsonPath("$[0].accountPool.registryType.id").value(1L))
@@ -79,16 +81,16 @@ public class AccountControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[0].accountNumber").value("111"))
-                .andExpect(jsonPath("$[0].accountPool.branchCode").value("0021"))
-                .andExpect(jsonPath("$[0].accountPool.currencyCode").value("500"))
+                .andExpect(jsonPath("$[0].accountPool.branch").value("0021"))
+                .andExpect(jsonPath("$[0].accountPool.currency").value("500"))
                 .andExpect(jsonPath("$[0].accountPool.mdmCode").value("11"))
                 .andExpect(jsonPath("$[0].accountPool.priorityCode").value("00"))
                 .andExpect(jsonPath("$[0].accountPool.registryType.id").value(1L))
                 .andExpect(jsonPath("$[0].accountPool.registryType.value").value("registry1"))
                 .andExpect(jsonPath("$[1].id").value(2L))
                 .andExpect(jsonPath("$[1].accountNumber").value("222"))
-                .andExpect(jsonPath("$[1].accountPool.branchCode").value("0022"))
-                .andExpect(jsonPath("$[1].accountPool.currencyCode").value("800"))
+                .andExpect(jsonPath("$[1].accountPool.branch").value("0022"))
+                .andExpect(jsonPath("$[1].accountPool.currency").value("800"))
                 .andExpect(jsonPath("$[1].accountPool.mdmCode").value("22"))
                 .andExpect(jsonPath("$[1].accountPool.priorityCode").value("00"))
                 .andExpect(jsonPath("$[1].accountPool.registryType.id").value(2L))
@@ -108,8 +110,8 @@ public class AccountControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.accountNumber").value("111"))
-                .andExpect(jsonPath("$.accountPool.branchCode").value("0021"))
-                .andExpect(jsonPath("$.accountPool.currencyCode").value("500"))
+                .andExpect(jsonPath("$.accountPool.branch").value("0021"))
+                .andExpect(jsonPath("$.accountPool.currency").value("500"))
                 .andExpect(jsonPath("$.accountPool.mdmCode").value("11"))
                 .andExpect(jsonPath("$.accountPool.priorityCode").value("00"))
                 .andExpect(jsonPath("$.accountPool.registryType.id").value(1L))
@@ -129,8 +131,8 @@ public class AccountControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.accountNumber").value("112"))
-                .andExpect(jsonPath("$.accountPool.branchCode").value("0021"))
-                .andExpect(jsonPath("$.accountPool.currencyCode").value("500"))
+                .andExpect(jsonPath("$.accountPool.branch").value("0021"))
+                .andExpect(jsonPath("$.accountPool.currency").value("500"))
                 .andExpect(jsonPath("$.accountPool.mdmCode").value("11"))
                 .andExpect(jsonPath("$.accountPool.priorityCode").value("00"))
                 .andExpect(jsonPath("$.accountPool.registryType.id").value(1L))
@@ -150,16 +152,16 @@ public class AccountControllerTest extends BaseTest {
         AccountDto one = new AccountDto(1L,
                 "111",
                 new AccountPoolDto(1L,
-                        "0021",
-                        "500",
+                        Branch.BRANCH0021,
+                        Currency.CURRENCY500,
                         "11",
                         "00",
                         new ProductRegisterTypeDto(1L, "registry1")));
         AccountDto two = new AccountDto(2L,
                 "222",
                 new AccountPoolDto(2L,
-                        "0022",
-                        "800",
+                        Branch.BRANCH0022,
+                        Currency.CURRENCY800,
                         "22",
                         "00",
                         new ProductRegisterTypeDto(2L, "registry2")));

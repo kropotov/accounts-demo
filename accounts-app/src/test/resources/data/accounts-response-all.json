@@ -4,8 +4,8 @@
     "accountNumber": "475335516415314841861",
     "accountPool": {
       "id": 1,
-      "branchCode": "0022",
-      "currencyCode": "800",
+      "branch": "0022",
+      "currency": "800",
       "mdmCode": "15",
       "priorityCode": "00",
       "registryType": {
@@ -19,8 +19,8 @@
     "accountNumber": "4753321651354151",
     "accountPool": {
       "id": 1,
-      "branchCode": "0022",
-      "currencyCode": "800",
+      "branch": "0022",
+      "currency": "800",
       "mdmCode": "15",
       "priorityCode": "00",
       "registryType": {
@@ -34,8 +34,8 @@
     "accountNumber": "4753352543276345",
     "accountPool": {
       "id": 1,
-      "branchCode": "0022",
-      "currencyCode": "800",
+      "branch": "0022",
+      "currency": "800",
       "mdmCode": "15",
       "priorityCode": "00",
       "registryType": {
@@ -49,8 +49,8 @@
     "accountNumber": "453432352436453276",
     "accountPool": {
       "id": 2,
-      "branchCode": "0021",
-      "currencyCode": "500",
+      "branch": "0021",
+      "currency": "500",
       "mdmCode": "13",
       "priorityCode": "00",
       "registryType": {
@@ -64,8 +64,8 @@
     "accountNumber": "45343221651354151",
     "accountPool": {
       "id": 2,
-      "branchCode": "0021",
-      "currencyCode": "500",
+      "branch": "0021",
+      "currency": "500",
       "mdmCode": "13",
       "priorityCode": "00",
       "registryType": {
@@ -79,8 +79,8 @@
     "accountNumber": "4534352543276345",
     "accountPool": {
       "id": 2,
-      "branchCode": "0021",
-      "currencyCode": "500",
+      "branch": "0021",
+      "currency": "500",
       "mdmCode": "13",
       "priorityCode": "00",
       "registryType": {

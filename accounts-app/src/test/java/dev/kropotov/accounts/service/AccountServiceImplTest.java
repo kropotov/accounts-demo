@@ -31,6 +31,8 @@ public class AccountServiceImplTest extends BaseServiceTest {
         List<AccountDto> response = accountService.readAll();
         String jsonCurrent = asJsonString(response);
         String jsonEtalon = readResourceToString(PATH_ACCOUNTS);
+        System.out.println("jsonEtalon: " + jsonEtalon);
+        System.out.println("jsonCurrent: " + jsonCurrent);
         assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
     }
 
@@ -38,7 +40,7 @@ public class AccountServiceImplTest extends BaseServiceTest {
     @SneakyThrows
     void create() {
         AccountDto accountDto = objectMapper.readValue(readResourceToString(PATH_ACCOUNT),
-                new TypeReference<AccountDto>() {
+                new TypeReference<>() {
                 });
         AccountDto newAccountDto = accountService.create(accountDto);
         accountDto.setId(newAccountDto.getId());
@@ -71,7 +73,7 @@ public class AccountServiceImplTest extends BaseServiceTest {
     @SneakyThrows
     void delete() {
         AccountDto accountDto = objectMapper.readValue(readResourceToString(PATH_ACCOUNT),
-                new TypeReference<AccountDto>() {
+                new TypeReference<>() {
                 });
         AccountDto newAccountDto = accountService.create(accountDto);
         accountDto.setId(newAccountDto.getId());

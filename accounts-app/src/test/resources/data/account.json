@@ -1,8 +1,8 @@
 {
   "accountNumber": "111",
   "accountPool": {
-    "branchCode": "0022",
-    "currencyCode": "800",
+    "branch": "0022",
+    "currency": "800",
     "mdmCode": "15",
     "priorityCode": "00",
     "registryType": {
