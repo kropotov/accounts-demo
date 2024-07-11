@@ -1,4 +1,4 @@
-package dev.kropotov.accounts.dto.common;
+package dev.kropotov.accounts.dto.response.common;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;

@@ -1,4 +1,4 @@
-package dev.kropotov.accounts.dto;
+package dev.kropotov.accounts.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

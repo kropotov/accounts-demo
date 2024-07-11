@@ -5,8 +5,6 @@ import dev.kropotov.accounts.entity.Product;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
 import dev.kropotov.accounts.mapper.ProductMapper;
 import dev.kropotov.accounts.mapper.ProductRegisterMapper;
-import dev.kropotov.accounts.mapper.ProductRegisterTypeMapper;
-import dev.kropotov.accounts.repository.ProductRegisterTypeRepository;
 import dev.kropotov.accounts.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,14 +18,12 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final ProductRegisterMapper productRegisterMapper;
-    private final ProductRegisterTypeMapper productRegisterTypeMapper;
-    private final ProductRegisterTypeRepository productRegisterTypeRepository;
+    private final ProductRegisterTypeService productRegisterTypeService;
 
     @Override
     public ProductDto create(ProductDto dto) {
         dto.getRegisters().forEach(productRegisterDto -> productRegisterDto.setType(
-                productRegisterTypeMapper.toDto(
-                        productRegisterTypeRepository.findRegisterTypeByValue(productRegisterDto.getType().getValue()))));
+                        productRegisterTypeService.readByValue(productRegisterDto.getType().getValue())));
 
         return productMapper.toDto(productRepository.save(productMapper.toEntity(dto)));
     }

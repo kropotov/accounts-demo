@@ -1,8 +1,8 @@
 package dev.kropotov.accounts.controller.api;
 
-import dev.kropotov.accounts.dto.CorporateSettlementInstanceRequestDto;
-import dev.kropotov.accounts.dto.CorporateSettlementInstanceResponseDto;
-import dev.kropotov.accounts.dto.common.ResponsePayload;
+import dev.kropotov.accounts.dto.request.CorporateSettlementInstanceRequestDto;
+import dev.kropotov.accounts.dto.response.CorporateSettlementInstanceResponseDto;
+import dev.kropotov.accounts.dto.response.common.ResponsePayload;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

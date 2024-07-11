@@ -6,6 +6,7 @@ import dev.kropotov.accounts.dto.AccountPoolDto;
 import dev.kropotov.accounts.dto.ProductRegisterTypeDto;
 import dev.kropotov.accounts.service.AccountPoolService;
 import dev.kropotov.accounts.service.AccountService;
+import dev.kropotov.accounts.service.ProductRegisterTypeService;
 import dev.kropotov.accounts.service.ProductService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,8 @@ public class AccountControllerTest extends BaseTest {
     AccountPoolService accountPoolService;
     @MockBean
     ProductService productService;
+    @MockBean
+    ProductRegisterTypeService productRegisterTypeService;
 
     @Test
     @SneakyThrows
