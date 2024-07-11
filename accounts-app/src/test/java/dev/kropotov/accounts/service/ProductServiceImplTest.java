@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ProductServiceImplTest extends BaseServiceTest {
     @Autowired
     private ProductService productService;
+
     @Autowired
     private ProductRegisterTypeService productRegisterTypeService;
 
@@ -28,16 +29,6 @@ public class ProductServiceImplTest extends BaseServiceTest {
     private static final String PATH_PRODUCTS = "/data/products-response-all.json";
 
     private ProductDto productDto;
-
-    @Test
-    void readAll() {
-        List<ProductDto> response = productService.readAll();
-        String jsonCurrent = asJsonString(response);
-        String jsonEtalon = readResourceToString(PATH_PRODUCTS);
-        System.out.println("jsonCurrent: " + jsonCurrent);
-        System.out.println("jsonEtalon: " + jsonEtalon);
-        assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
-    }
 
     @Test
     @BeforeEach
@@ -57,6 +48,14 @@ public class ProductServiceImplTest extends BaseServiceTest {
     void readById() {
         ProductDto newProductDto = productService.readById(productDto.getId());
         assertEquals(productDto, newProductDto);
+    }
+
+    @Test
+    void readAll() {
+        List<ProductDto> response = productService.readAll();
+        String jsonCurrent = asJsonString(response);
+        String jsonEtalon = readResourceToString(PATH_PRODUCTS);
+        assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
     }
 
     @Test
