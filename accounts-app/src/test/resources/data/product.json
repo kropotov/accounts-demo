@@ -13,17 +13,6 @@
       "currency": "800",
       "state": "OPEN",
       "accountNumber": null
-    },
-    {
-      "id": 2,
-      "type": {
-        "id": 2,
-        "value": "02.001.005_45343_CoDowFF"
-      },
-      "account": null,
-      "currency": "500",
-      "state": "OPEN",
-      "accountNumber": null
     }
   ]
 }

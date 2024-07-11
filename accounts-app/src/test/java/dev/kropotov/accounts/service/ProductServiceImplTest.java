@@ -72,7 +72,7 @@ public class ProductServiceImplTest extends BaseServiceTest {
 
     @Test
     void createProductRegister() {
-        ProductRegisterTypeDto registerTypeDto = productRegisterTypeService.readByValue("03.012.002_47533_ComSoLd");
+        ProductRegisterTypeDto registerTypeDto = productRegisterTypeService.readByValue("02.001.005_45343_CoDowFF");
 
         ProductRegisterDto registerDto = new ProductRegisterDto()
                 .setType(registerTypeDto)
@@ -82,6 +82,13 @@ public class ProductServiceImplTest extends BaseServiceTest {
         registerDto = productService.createProductRegister(productDto, registerDto);
 
         assertEquals(registerDto, productDto.getRegisters().getLast());
+
+
+        ProductRegisterDto secondRegisterDto = new ProductRegisterDto()
+                .setType(registerTypeDto)
+                .setCurrency(Currency.CURRENCY800)
+                .setState(State.OPEN);
+        assertThrows(IllegalArgumentException.class, () -> productService.createProductRegister(productDto, secondRegisterDto));
     }
 
     @Test

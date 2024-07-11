@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
         product.setRegisters(updatedDto.getRegisters().stream()
                 .map(productRegisterMapper::toEntity)
                 .collect(Collectors.toList())); //нельзя сразу toList(), т.к. будет UnsupportedOperationException
-                                                //т.к. создается immutable - лист, а нужен мутабельный
+        //т.к. создается immutable - лист, а нужен мутабельный
 
         //TODO: все сеттеры после добавления полей
         return productMapper.toDto(productRepository.save(product));
@@ -65,8 +65,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductRegisterDto createProductRegister(ProductDto productDto, ProductRegisterDto newProductRegisterDto) {
+        ProductRegisterDto finalNewProductRegisterDto = newProductRegisterDto;
+        if (productDto.getRegisters().stream()
+                .anyMatch(productRegisterDto ->
+                        productRegisterDto.getType().getValue().equals(finalNewProductRegisterDto.getType().getValue())
+                )) {
+            throw new IllegalArgumentException("Параметр registryTypeCode тип регистра " +
+                    newProductRegisterDto.getType().getValue() +
+                    " уже существует для ЭП с ИД " + productDto.getId()); //TODO: нужен хэндлер
+        }
+
         newProductRegisterDto = productRegisterService.create(newProductRegisterDto);
         productDto.getRegisters().add(newProductRegisterDto);
+
         update(productDto.getId(), productDto);
         return newProductRegisterDto;
     }
