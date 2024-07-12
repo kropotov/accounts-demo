@@ -32,6 +32,8 @@ public class AccountControllerTest extends BaseTest {
     ProductRegisterTypeService productRegisterTypeService;
     @MockBean
     ProductRegisterService productRegisterService;
+    @MockBean
+    AgreementService agreementService;
 
 
     @Test

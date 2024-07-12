@@ -1,8 +1,10 @@
 package dev.kropotov.accounts.service;
 
+import dev.kropotov.accounts.dto.AgreementDto;
 import dev.kropotov.accounts.dto.ProductDto;
 import dev.kropotov.accounts.dto.ProductRegisterDto;
 import dev.kropotov.accounts.entity.Product;
+import dev.kropotov.accounts.entity.ProductClass;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
 import dev.kropotov.accounts.mapper.AgreementMapper;
 import dev.kropotov.accounts.mapper.ProductClassMapper;
@@ -28,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRegisterService productRegisterService;
     private final ProductRegisterTypeService productRegisterTypeService;
     private final AgreementMapper agreementMapper;
+    private final AgreementService agreementService;
 
     @Override
     public ProductDto create(ProductDto dto) {
@@ -36,10 +39,37 @@ public class ProductServiceImpl implements ProductService {
                     productRegisterTypeService.readByValue(productRegisterDto.getType().getValue())));
         }
         if (dto.getProductClass() != null) {
-            dto.setProductClass(productClassMapper.toDto(
-                    productClassRepository.findProductClassByValue(dto.getProductClass().getValue())));
+            setProductClass(dto, dto.getProductClass().getValue());
         }
         return productMapper.toDto(productRepository.save(productMapper.toEntity(dto)));
+    }
+
+    public ProductDto setProductClass(ProductDto productDto, String value) {
+        ProductClass productClass = productClassRepository.findProductClassByValue(value);
+        if (productClass == null) {
+            throw new IllegalArgumentException("Код Продукта " + value + " не найдено в Каталоге продуктов tpp_ref_product_class");
+        }
+        productDto.setProductClass(productClassMapper.toDto(productClass));
+        return productMapper.toDto(productRepository.save(productMapper.toEntity(productDto)));
+    }
+
+    @Override
+    public AgreementDto createAgreement(ProductDto productDto, AgreementDto newAgreementDto) {
+        AgreementDto finalAgreementDto = newAgreementDto;
+
+        if (productDto.getAgreements().stream()
+                .anyMatch(agreementDto -> agreementDto.getNumber().equals(finalAgreementDto.getNumber()))) {
+            throw new IllegalArgumentException("Параметр № Дополнительного соглашения (сделки) Number " +
+                    newAgreementDto.getNumber() + " уже существует для ЭП с ИД " +
+                    productDto.getId()
+            );//TODO: нужен хэндлер
+        }
+
+        newAgreementDto = agreementService.create(newAgreementDto);
+        productDto.getAgreements().add(newAgreementDto);
+
+        update(productDto.getId(), productDto);
+        return newAgreementDto;
     }
 
     @Override
@@ -76,7 +106,7 @@ public class ProductServiceImpl implements ProductService {
         //т.к. создается immutable - лист, а нужен мутабельный
 
         if (updatedDto.getProductClass() != null) {
-            product.setProductClass(productClassRepository.findProductClassByValue(updatedDto.getProductClass().getValue()));
+            setProductClass(updatedDto, updatedDto.getProductClass().getValue());
         }
         product.setType(updatedDto.getType());
         product.setDateOfConclusion(updatedDto.getDateOfConclusion());

@@ -6,6 +6,9 @@ import dev.kropotov.accounts.repository.ProductRegisterTypeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ProductRegisterTypeServiceImpl implements ProductRegisterTypeService {
@@ -15,5 +18,12 @@ public class ProductRegisterTypeServiceImpl implements ProductRegisterTypeServic
     @Override
     public ProductRegisterTypeDto readByValue(String value) {
         return productRegisterTypeMapper.toDto(productRegisterTypeRepository.findRegisterTypeByValue(value));
+    }
+
+    @Override
+    public List<ProductRegisterTypeDto> readByProductClassValue(String value) {
+        return productRegisterTypeRepository.findRegisterTypeByProductClassValue(value).stream()
+                .map(productRegisterTypeMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

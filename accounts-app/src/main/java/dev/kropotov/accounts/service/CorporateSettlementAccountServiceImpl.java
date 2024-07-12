@@ -2,6 +2,7 @@ package dev.kropotov.accounts.service;
 
 import dev.kropotov.accounts.dto.*;
 import dev.kropotov.accounts.dto.request.CorporateSettlementAccountRequestDto;
+import dev.kropotov.accounts.dto.request.CorporateSettlementInstanceRequestDto;
 import dev.kropotov.accounts.dto.response.CorporateSettlementAccountResponseDto;
 
 import dev.kropotov.accounts.enums.Branch;
@@ -49,5 +50,18 @@ public class CorporateSettlementAccountServiceImpl implements CorporateSettlemen
         registerDto = productService.createProductRegister(productDto, registerDto);
 
         return new CorporateSettlementAccountResponseDto(registerDto.getId().toString());
+    }
+
+    @Override
+    public CorporateSettlementAccountResponseDto create(CorporateSettlementInstanceRequestDto request) {
+        CorporateSettlementAccountRequestDto accountRequest = new CorporateSettlementAccountRequestDto()
+                .setInstanceId(request.getInstanceId())
+                .setRegistryTypeCode(request.getRegisterType())
+                .setAccountType("Клиентский")
+                .setCurrencyCode(request.getIsoCurrencyCode())
+                .setBranchCode(request.getBranchCode())
+                .setPriorityCode("00")
+                .setMdmCode(request.getMdmCode());
+        return create(accountRequest);
     }
 }
