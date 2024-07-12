@@ -15,6 +15,8 @@ public class ProductRegisterType implements BaseEntity<Long> {
     @Column(unique = true, nullable = false)
     private String value;
 
-    //TODO: все поля
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_class_code", referencedColumnName = "value")
+    private ProductClass productClass;
 
 }

@@ -23,9 +23,9 @@
         "openingDate": "2024-07-03"
       }
     ],
-    "priority": 0,
     "type": "договор",
-    "productCode": 12,
+    "productClass": null,
+    "priority": 0,
     "dateOfConclusion": "2024-07-03"
   }
 ]

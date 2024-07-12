@@ -51,7 +51,7 @@ public class CorporateSettlementInstanceRequestDto {
 
     @Schema(description = "Приоритет")
     @NotNull
-    private Integer priority;
+    private Long priority;
 
     @Schema(description = "ID Договора")
     @NotNull

@@ -40,6 +40,7 @@ public class ProductServiceImplTest extends BaseServiceTest {
                 });
         ProductDto newProductDto = productService.create(productDto);
         String jsonCurrent = asJsonString(newProductDto);
+        System.out.println(jsonCurrent);
         assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
         productDto = newProductDto;
     }
@@ -63,6 +64,7 @@ public class ProductServiceImplTest extends BaseServiceTest {
         List<ProductDto> response = productService.readAll();
         String jsonCurrent = asJsonString(response);
         String jsonEtalon = readResourceToString(PATH_PRODUCTS);
+        System.out.println(jsonCurrent);
         assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
     }
 

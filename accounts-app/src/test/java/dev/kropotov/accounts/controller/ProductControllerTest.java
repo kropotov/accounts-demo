@@ -1,6 +1,7 @@
 package dev.kropotov.accounts.controller;
 
 import dev.kropotov.accounts.BaseTest;
+import dev.kropotov.accounts.dto.ProductClassDto;
 import dev.kropotov.accounts.dto.ProductDto;
 import dev.kropotov.accounts.enums.State;
 import dev.kropotov.accounts.service.*;
@@ -48,7 +49,7 @@ public class ProductControllerTest extends BaseTest {
                 .andExpect(jsonPath("$.number").value("111"))
                 .andExpect(jsonPath("$.type").value("договор"))
                 .andExpect(jsonPath("$.priority").value(0L))
-                .andExpect(jsonPath("$.productCode").value(1L));
+                .andExpect(jsonPath("$.productClass.value").value("03.012.002"));
     }
 
     @Test
@@ -63,7 +64,7 @@ public class ProductControllerTest extends BaseTest {
                 .andExpect(jsonPath("$[0].number").value("111"))
                 .andExpect(jsonPath("$[0].type").value("договор"))
                 .andExpect(jsonPath("$[0].priority").value(0L))
-                .andExpect(jsonPath("$[0].productCode").value(1L));
+                .andExpect(jsonPath("$[0].productClass.value").value("03.012.002"));
     }
 
     @Test
@@ -78,13 +79,13 @@ public class ProductControllerTest extends BaseTest {
                 .andExpect(jsonPath("$[0].number").value("111"))
                 .andExpect(jsonPath("$[0].type").value("договор"))
                 .andExpect(jsonPath("$[0].priority").value(0L))
-                .andExpect(jsonPath("$[0].productCode").value(1L))
+                .andExpect(jsonPath("$[0].productClass.value").value("03.012.002"))
                 .andExpect(jsonPath("$[1].id").value(2L))
                 .andExpect(jsonPath("$[1].state").value(State.OPEN.toString()))
                 .andExpect(jsonPath("$[1].number").value("222"))
                 .andExpect(jsonPath("$[1].type").value("договор"))
                 .andExpect(jsonPath("$.[1].priority").value(0L))
-                .andExpect(jsonPath("$[1].productCode").value(2L));
+                .andExpect(jsonPath("$[1].productClass.value").value("03.012.002"));
     }
 
     @Test
@@ -103,7 +104,7 @@ public class ProductControllerTest extends BaseTest {
                 .andExpect(jsonPath("$.number").value("111"))
                 .andExpect(jsonPath("$.type").value("договор"))
                 .andExpect(jsonPath("$.priority").value(0L))
-                .andExpect(jsonPath("$.productCode").value(1L));
+                .andExpect(jsonPath("$.productClass.value").value("03.012.002"));
     }
 
     @Test
@@ -122,7 +123,7 @@ public class ProductControllerTest extends BaseTest {
                 .andExpect(jsonPath("$.number").value("112"))
                 .andExpect(jsonPath("$.type").value("договор"))
                 .andExpect(jsonPath("$.priority").value(0L))
-                .andExpect(jsonPath("$.productCode").value(1L));
+                .andExpect(jsonPath("$.productClass.value").value("03.012.002"));
 
         accountDto.setNumber("111");
     }
@@ -141,7 +142,7 @@ public class ProductControllerTest extends BaseTest {
                 new ArrayList<>(),
                 new ArrayList<>(),
                 "договор",
-                1L,
+                new ProductClassDto(1L, "03.012.002"),
                 0L,
                 LocalDate.now());
 
@@ -151,7 +152,7 @@ public class ProductControllerTest extends BaseTest {
                 new ArrayList<>(),
                 new ArrayList<>(),
                 "договор",
-                2L,
+                new ProductClassDto(1L, "03.012.002"),
                 0L,
                 LocalDate.now());
         return List.of(one, two);

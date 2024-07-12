@@ -5,8 +5,10 @@ import dev.kropotov.accounts.dto.ProductRegisterDto;
 import dev.kropotov.accounts.entity.Product;
 import dev.kropotov.accounts.exceptions.ResourceNotFoundException;
 import dev.kropotov.accounts.mapper.AgreementMapper;
+import dev.kropotov.accounts.mapper.ProductClassMapper;
 import dev.kropotov.accounts.mapper.ProductMapper;
 import dev.kropotov.accounts.mapper.ProductRegisterMapper;
+import dev.kropotov.accounts.repository.ProductClassRepository;
 import dev.kropotov.accounts.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ProductClassRepository productClassRepository;
     private final ProductMapper productMapper;
     private final ProductRegisterMapper productRegisterMapper;
+    private final ProductClassMapper productClassMapper;
     private final ProductRegisterService productRegisterService;
     private final ProductRegisterTypeService productRegisterTypeService;
     private final AgreementMapper agreementMapper;
@@ -30,6 +34,10 @@ public class ProductServiceImpl implements ProductService {
         if (dto.getRegisters() != null) {
             dto.getRegisters().forEach(productRegisterDto -> productRegisterDto.setType(
                     productRegisterTypeService.readByValue(productRegisterDto.getType().getValue())));
+        }
+        if (dto.getProductClass() != null) {
+            dto.setProductClass(productClassMapper.toDto(
+                    productClassRepository.findProductClassByValue(dto.getProductClass().getValue())));
         }
         return productMapper.toDto(productRepository.save(productMapper.toEntity(dto)));
     }
@@ -59,8 +67,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         product.setNumber(updatedDto.getNumber());
         product.setState(updatedDto.getState());
-        updatedDto.getRegisters().stream()
-                .forEach(registerDto -> registerDto.setType(
+        updatedDto.getRegisters().forEach(registerDto -> registerDto.setType(
                         productRegisterTypeService.readByValue(registerDto.getType().getValue())));
 
         product.setRegisters(updatedDto.getRegisters().stream()
@@ -68,7 +75,9 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList())); //нельзя сразу toList(), т.к. будет UnsupportedOperationException
         //т.к. создается immutable - лист, а нужен мутабельный
 
-        product.setProductCode(updatedDto.getProductCode());
+        if (updatedDto.getProductClass() != null) {
+            product.setProductClass(productClassRepository.findProductClassByValue(updatedDto.getProductClass().getValue()));
+        }
         product.setType(updatedDto.getType());
         product.setDateOfConclusion(updatedDto.getDateOfConclusion());
 

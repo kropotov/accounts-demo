@@ -32,8 +32,9 @@ public class Product implements BaseEntity<Long> {
     @Column
     private String type; //TODO: enum
 
-    @Column(name = "product_code_id")
-    private Long productCode;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_code_id")
+    private ProductClass productClass;
 
     @Column
     private Long priority;
