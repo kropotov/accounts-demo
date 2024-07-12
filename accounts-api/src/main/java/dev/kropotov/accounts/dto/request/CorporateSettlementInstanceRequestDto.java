@@ -29,15 +29,15 @@ public class CorporateSettlementInstanceRequestDto {
     @NotBlank
     private String productType; //TODO: enum
 
-    @Schema(description = "Код продукта в каталоге продуктов")
+    @Schema(description = "Код продукта в каталоге продуктов", example = "03.012.002")
     @NotBlank
     private String productCode;
 
-    @Schema(description = "Тип регистра")
+    @Schema(description = "Тип регистра", example = "03.012.002_47533_ComSoLd")
     @NotBlank
     private String registerType;
 
-    @Schema(description = "Код Клиента (mdm)")
+    @Schema(description = "Код Клиента (mdm)", example = "15")
     @NotBlank
     private String mdmCode;
 
@@ -46,7 +46,7 @@ public class CorporateSettlementInstanceRequestDto {
     private String contractNumber;
 
     @Schema(description = "Дата заключения договора обслуживания")
-    @NotBlank
+    @NotNull
     private LocalDate contractDate;
 
     @Schema(description = "Приоритет")
@@ -57,13 +57,13 @@ public class CorporateSettlementInstanceRequestDto {
     @NotNull
     private Long contractId;
 
-    @Schema(description = "Код филиала")
+    @Schema(description = "Код филиала", example = "0022")
     @Size(min = 1, max = 4)
     private String branchCode;
 
-    @Schema(description = "Код валюты")
+    @Schema(description = "Код валюты", example = "800")
     @Size(min = 1, max = 3)
-    private String IsoCurrencyCode;
+    private String isoCurrencyCode;
 
     @Schema(description = "Код срочности договора")
     @NotBlank

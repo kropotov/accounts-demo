@@ -53,7 +53,7 @@ public class CorporateSettlementAccountServiceImpl implements CorporateSettlemen
     }
 
     @Override
-    public CorporateSettlementAccountResponseDto create(CorporateSettlementInstanceRequestDto request) {
+    public String create(CorporateSettlementInstanceRequestDto request) {
         CorporateSettlementAccountRequestDto accountRequest = new CorporateSettlementAccountRequestDto()
                 .setInstanceId(request.getInstanceId())
                 .setRegistryTypeCode(request.getRegisterType())
@@ -62,6 +62,6 @@ public class CorporateSettlementAccountServiceImpl implements CorporateSettlemen
                 .setBranchCode(request.getBranchCode())
                 .setPriorityCode("00")
                 .setMdmCode(request.getMdmCode());
-        return create(accountRequest);
+        return create(accountRequest).getAccountId();
     }
 }
