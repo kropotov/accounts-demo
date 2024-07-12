@@ -80,6 +80,7 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setType(updatedDto.getType());
         product.setDateOfConclusion(updatedDto.getDateOfConclusion());
+        product.setPriority(updatedDto.getPriority());
 
         product.setAgreements(updatedDto.getAgreements().stream()
                 .map(agreementMapper::toEntity)

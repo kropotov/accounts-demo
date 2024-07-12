@@ -40,7 +40,7 @@ public class ProductDto {
     @NotBlank
     private String type; //TODO: enum
 
-    @Schema(description = "Код продукта в каталоге продуктов", example = "{\"id\": 1, \"value\": \"03.012.002\"}")
+    @Schema(description = "Код продукта в каталоге продуктов", example = "null")
     @Valid
     private ProductClassDto productClass;
 
