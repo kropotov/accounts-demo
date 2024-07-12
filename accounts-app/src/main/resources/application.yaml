@@ -12,8 +12,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
   datasource:
-    #url: jdbc:postgresql://postgres:5432/accounts
+    url: jdbc:postgresql://postgres:5432/accounts
     #for local tests:
-    url: jdbc:postgresql://localhost:5432/accounts
+    #url: jdbc:postgresql://localhost:5432/accounts
     username: myuser
     password: secret
