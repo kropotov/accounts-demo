@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRegisterTypeDto {
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY, example = "1")
     private Long id;
 
-    @Schema(description = "Тип регистра")
+    @Schema(description = "Тип регистра", example = "03.012.002_47533_ComSoLd")
     @NotBlank
     private String value;
 

@@ -14,7 +14,7 @@ public class AccountDto {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @Schema(description = "Номер счета")
+    @Schema(description = "Номер счета", example = "475335516415314841861")
     @NotBlank
     @Size(min = 1, max = 25)
     private String accountNumber;

@@ -5,5 +5,5 @@ import dev.kropotov.accounts.dto.response.CorporateSettlementAccountResponseDto;
 
 
 public interface CorporateSettlementAccountService {
-    CorporateSettlementAccountResponseDto create(CorporateSettlementAccountRequestDto accountRequest);
+    CorporateSettlementAccountResponseDto create(CorporateSettlementAccountRequestDto request);
 }

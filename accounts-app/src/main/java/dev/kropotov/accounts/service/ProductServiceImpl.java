@@ -47,10 +47,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true) //TODO: убрать
+    public List<ProductDto> readByProductNumber(String number) {
+        return productRepository.findProductByNumber(number).stream()
+                .map(productMapper::toDto)
+                .toList();
+    }
+
+    @Override
     public ProductDto update(Long id, ProductDto updatedDto) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         product.setNumber(updatedDto.getNumber());
         product.setState(updatedDto.getState());
+        updatedDto.getRegisters().stream()
+                .forEach(registerDto -> registerDto.setType(
+                        productRegisterTypeService.readByValue(registerDto.getType().getValue())));
+
         product.setRegisters(updatedDto.getRegisters().stream()
                 .map(productRegisterMapper::toEntity)
                 .collect(Collectors.toList())); //нельзя сразу toList(), т.к. будет UnsupportedOperationException
@@ -62,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
 
         product.setAgreements(updatedDto.getAgreements().stream()
                 .map(agreementMapper::toEntity)
-                .collect(Collectors.toList())); //нельзя сразу toList(), т.к. будет UnsupportedOperationException
+                .collect(Collectors.toList()));
 
         //TODO: все сеттеры после добавления полей
         return productMapper.toDto(productRepository.save(product));

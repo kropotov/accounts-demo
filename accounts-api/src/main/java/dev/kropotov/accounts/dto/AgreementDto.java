@@ -16,11 +16,11 @@ public class AgreementDto {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @Schema(description = "Номер ДС")
+    @Schema(description = "Номер ДС", example = "1")
     @NotBlank
     private String number;
 
-    @Schema(description = "Дата начала сделки")
+    @Schema(description = "Дата начала сделки", example = "2024-07-03")
     @NotNull
     private LocalDate openingDate;
 }

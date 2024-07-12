@@ -28,7 +28,7 @@ public interface BaseCrudApi<T> {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(
-            summary = "Изменеие записи",
+            summary = "Изменение записи",
             description = "Позволяет изменить значения записи в таблицы по идентификатору"
     )
     ResponseEntity<T> update(@PathVariable("id") Long id, @Valid @RequestBody T updatedDto);

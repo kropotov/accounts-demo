@@ -51,6 +51,14 @@ public class ProductServiceImplTest extends BaseServiceTest {
     }
 
     @Test
+    void readByNumber() {
+        List<ProductDto> response = productService.readByProductNumber("111");
+        String jsonCurrent = asJsonString(response);
+        String jsonEtalon = readResourceToString(PATH_PRODUCTS);
+        assertJsonEqualWithoutId(jsonEtalon, jsonCurrent);
+    }
+
+    @Test
     void readAll() {
         List<ProductDto> response = productService.readAll();
         String jsonCurrent = asJsonString(response);

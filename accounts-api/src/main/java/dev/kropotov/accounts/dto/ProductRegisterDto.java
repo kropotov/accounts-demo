@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.hibernate.validator.constraints.Range;
 
 @Data
 @AllArgsConstructor
@@ -23,19 +22,18 @@ public class ProductRegisterDto {
     @Valid
     private ProductRegisterTypeDto type;
 
-    @Schema(description = "Счет")
+    @Schema(description = "Счет", example = "{\"id\": 1, \"accountNumber\": \"475335516415314841861\"}")
     @Valid
     private AccountDto account;
 
-    @Schema(description = "Код валюты")
+    @Schema(description = "Код валюты", example = "800")
     @NotNull
     private Currency currency;
 
-    @Schema(description = "Состояние")
-    @Range(min = 1, max = 3)
+    @Schema(description = "Состояние", example = "OPEN")
     private State state;
 
-    @Schema(description = "Номер счета")
+    @Schema(description = "Номер счета", example = "475335516415314841861")
     private String accountNumber;
 
 }
