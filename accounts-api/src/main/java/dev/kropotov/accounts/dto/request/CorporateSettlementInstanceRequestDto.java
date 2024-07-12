@@ -18,9 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CorporateSettlementInstanceRequestDto {
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
-    private Long id;
-
     @Schema(description = "Идентификатор экземпляра продукта")
     private Long instanceId;
 
@@ -71,6 +68,5 @@ public class CorporateSettlementInstanceRequestDto {
     @Schema(description = "Код срочности договора")
     @NotBlank
     String urgencyCode;
-
 
 }

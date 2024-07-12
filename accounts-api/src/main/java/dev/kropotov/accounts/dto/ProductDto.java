@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true)
 public class ProductDto {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
@@ -41,6 +43,10 @@ public class ProductDto {
     @Schema(description = "Код продукта в каталоге продуктов", example = "12")
     @NotNull
     private Long productCode;
+
+    @Schema(description = "Приоритет", example = "0")
+    @NotNull
+    private Long priority;
 
     @Schema(description = "Дата заключения договора обслуживания", example = "2024-07-03")
     @NotNull

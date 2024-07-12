@@ -36,6 +36,9 @@ public class Product implements BaseEntity<Long> {
     private Long productCode;
 
     @Column
+    private Long priority;
+
+    @Column
     private LocalDate dateOfConclusion;
 
     //TODO: все остальные поля продукта
