@@ -17,12 +17,12 @@ public class ProductRegisterTypeServiceImpl implements ProductRegisterTypeServic
 
     @Override
     public ProductRegisterTypeDto readByValue(String value) {
-        return productRegisterTypeMapper.toDto(productRegisterTypeRepository.findRegisterTypeByValue(value));
+        return productRegisterTypeMapper.toDto(productRegisterTypeRepository.findByValue(value));
     }
 
     @Override
     public List<ProductRegisterTypeDto> readByProductClassValue(String value) {
-        return productRegisterTypeRepository.findRegisterTypeByProductClassValue(value).stream()
+        return productRegisterTypeRepository.findByProductClassValue(value).stream()
                 .map(productRegisterTypeMapper::toDto)
                 .collect(Collectors.toList());
     }

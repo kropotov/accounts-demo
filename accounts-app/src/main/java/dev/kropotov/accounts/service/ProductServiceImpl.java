@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public ProductDto setProductClass(ProductDto productDto, String value) {
-        ProductClass productClass = productClassRepository.findProductClassByValue(value);
+        ProductClass productClass = productClassRepository.findByValue(value);
         if (productClass == null) {
             throw new IllegalArgumentException("Код Продукта " + value + " не найдено в Каталоге продуктов tpp_ref_product_class");
         }
@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true) //TODO: убрать
     public List<ProductDto> readByProductNumber(String number) {
-        return productRepository.findProductByNumber(number).stream()
+        return productRepository.findAllByNumber(number).stream()
                 .map(productMapper::toDto)
                 .toList();
     }

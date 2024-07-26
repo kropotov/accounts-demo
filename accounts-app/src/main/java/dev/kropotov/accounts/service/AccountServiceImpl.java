@@ -18,7 +18,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDto> readByAccountNumber(String accountNumber) {
-        return accountRepository.findAccountByAccountNumber(accountNumber).stream()
+        return accountRepository.findAllByAccountNumber(accountNumber).stream()
                 .map(accountMapper::toDto)
                 .toList();
     }
