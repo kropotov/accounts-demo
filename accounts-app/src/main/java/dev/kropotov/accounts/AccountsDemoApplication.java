@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("dev.kropotov.accounts.*")
-
 public class AccountsDemoApplication {
 
     public static void main(String[] args) {
